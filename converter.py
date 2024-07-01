@@ -13,8 +13,21 @@ def main():
 
 def d_to_b():
     num = int(input("Please input your whole denary number: "))
+
     bits = num_of_bits(num)
-    print(bits)
+    
+    binary = ""
+    
+    for i in range(bits - 1, -1, -1):
+        max = pow(2, i)
+        if (num / max) >= 1:
+            binary += "1"
+            num = num - max
+        else:
+            binary += "0"
+
+    print(binary)
+        
 
 def b_to_d():
     print()
