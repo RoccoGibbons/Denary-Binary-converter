@@ -60,17 +60,15 @@ def b_to_d():
                 print("Input a valid binary number")
                 continue
             break
-    
-    print(binary)
-
 
     num = 0
     column = 1
 
-    
-    #print(len(binary))
+    for i in range(len(binary) - 1, -1, -1):
+        num += int(binary[i]) * column
+        column *= 2
 
-    return 0
+    return num
 
 
 def num_of_bits(num):
