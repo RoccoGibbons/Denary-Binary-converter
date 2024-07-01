@@ -1,18 +1,29 @@
 from math import log2, ceil
 
 def main():
-    convert = int(input("Would you like to convert denary to binary(1) or binary to denary(2)  "))
+    convert = input("Would you like to convert denary to binary(1) or binary to denary(2)  ")
     
-    if convert == 1:
-        d_to_b()
-    elif convert == 2:
-        b_to_d()
+    result = ""
+
+    if convert == "1":
+        result = d_to_b()
+    elif convert == "2":
+        result = b_to_d()
     else:
         print("Input a valid option")
+    
+    print(result)
 
 
 def d_to_b():
-    num = int(input("Please input your whole denary number: "))
+    while True:
+        try:
+            num = int(input("Please input your whole denary number: "))
+        except ValueError:
+            print("Input a valid number")
+            continue
+        else:
+            break
 
     bits = num_of_bits(num)
     
@@ -26,14 +37,45 @@ def d_to_b():
         else:
             binary += "0"
 
-    print(binary)
+    return binary
         
 
 def b_to_d():
-    print()
+    invalid_nums = ['2', '3', '4', '5', '6', '7', '8', '9']
+    
+    while True:
+        valid = True
+        test = 0
+        binary = input("Please input your binary number: ")
+        try:
+            int(binary)
+        except ValueError:
+            print("Input a valid binary number")
+            continue
+        else:
+            for n in binary:
+                if n in invalid_nums:
+                    valid = False
+            if valid == False:
+                print("Input a valid binary number")
+                continue
+            break
+    
+    print(binary)
+
+
+    num = 0
+    column = 1
+
+    
+    #print(len(binary))
+
+    return 0
+
 
 def num_of_bits(num):
     bits = ceil(log2(num))
     return bits
+
 
 main()
