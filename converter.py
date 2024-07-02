@@ -1,14 +1,40 @@
 from math import log2, ceil
 
 def main():
-    convert = input("Would you like to convert denary to binary(1) or binary to denary(2)  ")
+    convert = input("Would you like to convert between denary and binary(1), denary and hex(2), or binary and hex(3)")
     
     result = ""
 
     if convert == "1":
-        result = d_to_b()
+        convert2 = input("Would you like to convert denary to binary(1), or binary to denary(2)?")
+
+        if convert2 == "1":
+            result = d_to_b()
+        elif convert 2 == "2":
+            result = b_to_d()
+        else:
+            print("Input a valid option")
+    
     elif convert == "2":
-        result = b_to_d()
+        convert2 = input("Would you like to convert denary to hex(1), or hex to denary(2)")
+
+        if convert2 == "1":
+            #denary to hex
+        elif convert 2 == "2":
+            #hex to denary
+        else:
+            print("Input a valid option")
+
+    elif convert == "3":
+        convert2 = input("Would you like to convert binary to hex(1), or hex to binary(2)")
+
+        if convert2 == "1":
+            #binary to hex
+        elif convert 2 == "2":
+            #hex to binary
+        else:
+            print("Input a valid option")
+
     else:
         print("Input a valid option")
     
