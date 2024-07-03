@@ -10,7 +10,7 @@ def main():
 
         if convert2 == "1":
             result = d_to_b()
-        elif convert 2 == "2":
+        elif convert2 == "2":
             result = b_to_d()
         else:
             print("Input a valid option")
@@ -19,8 +19,10 @@ def main():
         convert2 = input("Would you like to convert denary to hex(1), or hex to denary(2)")
 
         if convert2 == "1":
+            print()
             #denary to hex
-        elif convert 2 == "2":
+        elif convert2 == "2":
+            print()
             #hex to denary
         else:
             print("Input a valid option")
@@ -30,8 +32,10 @@ def main():
 
         if convert2 == "1":
             #binary to hex
-        elif convert 2 == "2":
+            print()
+        elif convert2 == "2":
             #hex to binary
+            print()
         else:
             print("Input a valid option")
 
@@ -41,8 +45,8 @@ def main():
     print(result)
 
 
-def d_to_b():
-    while True:
+def num_input():
+     while True:
         try:
             num = int(input("Please input your whole denary number: "))
         except ValueError:
@@ -50,25 +54,11 @@ def d_to_b():
             continue
         else:
             break
+     return num
 
-    bits = num_of_bits(num)
-    
-    binary = ""
-    
-    for i in range(bits - 1, -1, -1):
-        max = pow(2, i)
-        if (num / max) >= 1:
-            binary += "1"
-            num = num - max
-        else:
-            binary += "0"
 
-    return binary
-        
-
-def b_to_d():
+def binary_input(): 
     invalid_nums = ['2', '3', '4', '5', '6', '7', '8', '9']
-    
     while True:
         valid = True
         test = 0
@@ -86,6 +76,30 @@ def b_to_d():
                 print("Input a valid binary number")
                 continue
             break
+    return binary
+
+
+
+def d_to_b():
+    num = num_input()
+
+    bits = num_of_bits(num)
+    
+    binary = ""
+    
+    for i in range(bits - 1, -1, -1):
+        max = pow(2, i)
+        if (num / max) >= 1:
+            binary += "1"
+            num = num - max
+        else:
+            binary += "0"
+
+    return binary
+        
+
+def b_to_d():
+    binary = binary_input()
 
     num = 0
     column = 1
