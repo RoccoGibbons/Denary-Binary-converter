@@ -21,8 +21,7 @@ def main():
         if convert2 == "1":
             result = "0x" + d_to_h()
         elif convert2 == "2":
-            print()
-            #hex to denary
+            result = h_to_d()
         else:
             print("Input a valid option")
 
@@ -60,7 +59,7 @@ def binary_input():
     invalid_nums = ['2', '3', '4', '5', '6', '7', '8', '9']
     while True:
         valid = True
-        test = 0
+        
         binary = input("Please input your binary number: ")
         try:
             int(binary)
@@ -77,6 +76,26 @@ def binary_input():
             break
     return binary
 
+
+def hexadecimal_input():
+    valid_chars = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F']
+    while True:
+        valid = True
+
+        hexadecimal = input("Please input your hexadecimal number: ")
+        hexadecimal = hexadecimal.upper()
+
+        if hexadecimal[:2] == "0X":
+            hexadecimal = hexadecimal[2:]
+        
+        for c in hexadecimal:
+            if c not in valid_chars:
+                valid = False
+        if valid == False:
+            print("Input a valid hexadecimal number")
+            continue
+
+        return hexadecimal
 
 
 def d_to_b():
@@ -133,10 +152,38 @@ def d_to_h():
                 case 15:
                     hexa += "F"
                 case _:
-                    print("Something went wrong - hex match statement")
+                    print("Something went wrong - d to h match statement")
         num -= (maxi * digit)
     
     return hexa
+
+
+def h_to_d():
+    hexa = hexadecimal_input()
+    num = 0
+    length = len(hexa)
+
+    for i in range(length):
+        column = pow(16, length - i - 1)
+        if int(hexa[i]):
+            num += column * int(hexa[i])
+            continue
+        match hexa[i]:
+            case "A":
+                num += column * 10
+            case "B":
+                num += column * 11
+            case "C":
+                num += column * 12
+            case "D":
+                num += column * 13
+            case "E":
+                num += column * 14
+            case "F":
+                num += column * 15
+            case _:
+                print("Something went wrong - h to d match statement")
+    return num
 
 
 
@@ -146,7 +193,7 @@ def num_of_bits_bin(num):
 
 def num_of_bits_hex(num):
     bits = ceil(log(num, 16))
-    return bits
+    return bits23814970
 
 
 main()
