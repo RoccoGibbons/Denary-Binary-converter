@@ -31,7 +31,7 @@ def main():
         if convert2 == "1":
             result = "0x" + b_to_h()
         elif convert2 == "2":
-            #hex to binary
+            result = h_to_b()
             print()
         else:
             print("Input a valid option")
@@ -164,7 +164,7 @@ def h_to_d():
 
     for i in range(length):
         column = pow(16, length - i - 1)
-        if int(hexa[i]):
+        if hexa[i].isdigit():
             num += column * int(hexa[i])
             continue
         match hexa[i]:
@@ -232,7 +232,39 @@ def b_to_h():
             case _:
                 print("Something went wrong - b to h match")
     return hexa
-    
+
+
+def h_to_b():
+    hexa = hexadecimal_input()
+    binary = ""
+
+    for n in hexa:
+        if n.isdigit():
+            num = int(n)
+        else:
+            match n:
+                case "A":
+                    num = 10
+                case "B":
+                    num = 11
+                case "C":
+                    num = 12
+                case "D":
+                    num = 13
+                case "E":
+                    num = 14
+                case "F":
+                    num = 15
+        column = 8
+        for i in range(4):
+            if (num / column) >= 1:
+                binary += "1"
+                num -= column
+            else:
+                binary += "0"
+            column /= 2
+    return str(int(binary))
+
 
 def num_of_bits_bin(num):
     bits = ceil(log2(num, 2))
