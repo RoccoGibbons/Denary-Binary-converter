@@ -1,12 +1,12 @@
-from math import log2, ceil
+from math import log, ceil
 
 def main():
-    convert = input("Would you like to convert between denary and binary(1), denary and hex(2), or binary and hex(3)")
+    convert = input("Would you like to convert between denary and binary(1), denary and hex(2), or binary and hex(3) ")
     
     result = ""
 
     if convert == "1":
-        convert2 = input("Would you like to convert denary to binary(1), or binary to denary(2)?")
+        convert2 = input("Would you like to convert denary to binary(1), or binary to denary(2)? ")
 
         if convert2 == "1":
             result = d_to_b()
@@ -16,11 +16,10 @@ def main():
             print("Input a valid option")
     
     elif convert == "2":
-        convert2 = input("Would you like to convert denary to hex(1), or hex to denary(2)")
+        convert2 = input("Would you like to convert denary to hex(1), or hex to denary(2) ")
 
         if convert2 == "1":
-            print()
-            #denary to hex
+            result = "0x" + d_to_h()
         elif convert2 == "2":
             print()
             #hex to denary
@@ -28,7 +27,7 @@ def main():
             print("Input a valid option")
 
     elif convert == "3":
-        convert2 = input("Would you like to convert binary to hex(1), or hex to binary(2)")
+        convert2 = input("Would you like to convert binary to hex(1), or hex to binary(2) ")
 
         if convert2 == "1":
             #binary to hex
@@ -82,16 +81,14 @@ def binary_input():
 
 def d_to_b():
     num = num_input()
-
-    bits = num_of_bits(num)
-    
+    bits = num_of_bits_bin(num)
     binary = ""
     
     for i in range(bits - 1, -1, -1):
-        max = pow(2, i)
-        if (num / max) >= 1:
+        maxi = pow(2, i)
+        if (num / maxi) >= 1:
             binary += "1"
-            num = num - max
+            num = num - maxi
         else:
             binary += "0"
 
@@ -111,8 +108,44 @@ def b_to_d():
     return num
 
 
-def num_of_bits(num):
-    bits = ceil(log2(num))
+def d_to_h():
+    num = num_input()
+    bits = num_of_bits_hex(num)
+    hexa = ""
+
+    for i in range(bits - 1, -1, -1):
+        maxi = pow(16, i)
+        digit = num // maxi
+        if digit < 10:
+            hexa += str(digit)
+        else:
+            match digit:
+                case 10:
+                    hexa += "A"
+                case 11:
+                    hexa += "B"
+                case 12:
+                    hexa += "C"
+                case 13:
+                    hexa += "D"
+                case 14:
+                    hexa += "E"
+                case 15:
+                    hexa += "F"
+                case _:
+                    print("Something went wrong - hex match statement")
+        num -= (maxi * digit)
+    
+    return hexa
+
+
+
+def num_of_bits_bin(num):
+    bits = ceil(log2(num, 2))
+    return bits
+
+def num_of_bits_hex(num):
+    bits = ceil(log(num, 16))
     return bits
 
 
