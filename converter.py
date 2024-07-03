@@ -29,8 +29,7 @@ def main():
         convert2 = input("Would you like to convert binary to hex(1), or hex to binary(2) ")
 
         if convert2 == "1":
-            #binary to hex
-            print()
+            result = "0x" + b_to_h()
         elif convert2 == "2":
             #hex to binary
             print()
@@ -186,10 +185,59 @@ def h_to_d():
     return num
 
 
+def b_to_h():
+    binary = binary_input()
+    length = len(binary)
+    zeroCount = 4 - (length % 4)
+    if zeroCount == 4:
+        zeroCount = 0
+    fullLengthBinary = "0" * zeroCount + binary
+    length = len(fullLengthBinary)
+
+    groups = []
+    start, end = 0, 4
+
+    for i in range(int(length / 4)):
+        groups.append(fullLengthBinary[start: end])
+        start += 4
+        end += 4
+    
+    hexa = ""
+
+    for binary in groups:
+        num = 0
+        counter = 3
+        for j in binary:
+            column = pow(2, counter)
+            if j == "1":
+                num += column
+            counter -= 1
+
+        if num < 10:
+            hexa += str(num)
+            continue
+        match num:
+            case 10:
+                hexa += "A"
+            case 11:
+                hexa += "B"
+            case 12:
+                hexa += "C"
+            case 13:
+                hexa += "D"
+            case 14:
+                hexa += "E"
+            case 15:
+                hexa += "F"
+            case _:
+                print("Something went wrong - b to h match")
+    return hexa
+    
 
 def num_of_bits_bin(num):
     bits = ceil(log2(num, 2))
     return bits
+
 
 def num_of_bits_hex(num):
     bits = ceil(log(num, 16))
