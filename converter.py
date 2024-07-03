@@ -193,7 +193,7 @@ def num_of_bits_bin(num):
 
 def num_of_bits_hex(num):
     bits = ceil(log(num, 16))
-    return bits23814970
+    return bits
 
 
 main()
